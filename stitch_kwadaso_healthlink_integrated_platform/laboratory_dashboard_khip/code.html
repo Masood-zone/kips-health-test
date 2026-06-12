@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KHIP Health | Laboratory Module</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            box-shadow: inset 4px 0 0 0 #406900;
+        }
+        /* Custom scrollbar for medical data density */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e0e3e5; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c1cab0; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ddb1e",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#001b7d",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-container": "#00597f",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#8edc1f",
+                        "tertiary-fixed": "#c8e6ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#3a53c9",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "tertiary": "#006590",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001159",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#8acfff",
+                        "tertiary-fixed-dim": "#88ceff",
+                        "on-primary-fixed-variant": "#2f4f00",
+                        "outline-variant": "#c1cab0",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#1c38b1",
+                        "primary-fixed": "#a8f93f",
+                        "primary": "#406900",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7087ff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#8ddb1e",
+                        "on-primary-container": "#375d00",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#406900",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#414a36",
+                        "outline": "#717a64",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#102000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dee1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-padding": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg shadow-sm z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">KHIP Health</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Municipal Health Admin</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-md text-label-md">Patient Records</span>
+</a>
+<!-- Lab Requests: Active State mapping -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary transition-colors duration-200 scale-[0.99]" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-md text-label-md">Lab Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-md text-label-md">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-label-md text-label-md">Referrals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto px-lg pt-lg flex flex-col gap-4">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-label-md hover:shadow-lg transition-all active:scale-95">
+                Register Patient
+            </button>
+<div class="flex flex-col gap-1 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar (Authority: JSON) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-lg z-40 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-sm focus:ring-2 focus:ring-primary-container" placeholder="Search Lab ID or Patient..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary font-body-md transition-colors" href="#">Directory</a>
+<a class="text-on-surface-variant hover:text-primary font-body-md transition-colors" href="#">Resources</a>
+</nav>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+<div class="flex items-center gap-2 pl-2">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="A professional close-up portrait of a medical professional wearing a white lab coat and stethoscope, looking confident and friendly in a bright modern hospital setting with soft clinical lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHUfSvA48YZjLYFyBWmUzMxmxGblHGJ9uaCiYEzPNBOvYZtGgynXRKyWlbLEfZSTROr-jEFMym11CA-wD5FdxcQb93uyOaS8qja7wT5RiagbSnCfTQjGK2GtlFP5ga1uGqFfxdXG8OEQ4yrrJQtnEy1dPH6dorSSRHhP6skkrq1W4q3-FY5vGqLVk8T7pre21_SxMsc3Hg--lHseQMwS7L6SEdj7h5tb8_TiDAAv1Hf01w4pMbilPoSeofjpv5NdIN4CzCT8q_Rns"/>
+<span class="font-label-md text-label-md hidden lg:block">Dr. Kwaku Mensah</span>
+</div>
+</div>
+</div>
+</header>
+<div class="pt-24 px-lg pb-lg">
+<!-- Lab Overview Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-start justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Queue Size</p>
+<h2 class="font-headline-lg text-headline-lg text-primary">24</h2>
+<span class="text-xs text-secondary font-bold">+5 since 08:00</span>
+</div>
+<div class="p-3 bg-primary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-primary">biotech</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-start justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Urgent Tests</p>
+<h2 class="font-headline-lg text-headline-lg text-error">03</h2>
+<span class="text-xs text-error font-bold">Priority Processing</span>
+</div>
+<div class="p-3 bg-error-container/50 rounded-lg">
+<span class="material-symbols-outlined text-error">priority_high</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-start justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Completed (Today)</p>
+<h2 class="font-headline-lg text-headline-lg text-secondary">142</h2>
+<span class="text-xs text-secondary-container font-bold">98% Accuracy rate</span>
+</div>
+<div class="p-3 bg-secondary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-start justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Pending Sync</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface-variant">08</h2>
+<span class="text-xs text-on-surface-variant/50 font-bold">Cloud Syncing...</span>
+</div>
+<div class="p-3 bg-surface-container-high rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant">sync</span>
+</div>
+</div>
+</div>
+<!-- Main Laboratory Workflow Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Pending Test Queue -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="p-lg flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-bold">pending_actions</span>
+<h3 class="font-headline-sm text-headline-sm">Pending Test Queue</h3>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-body-sm font-label-md border border-outline-variant rounded-full hover:bg-surface-container-low transition-all">Filter</button>
+<button class="px-4 py-2 text-body-sm font-label-md bg-secondary text-on-secondary rounded-full hover:shadow-md active:scale-95 transition-all">Export PDF</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Test ID</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Patient Name</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Test Type</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Urgency</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Status</th>
+<th class="px-lg py-4"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant hover:bg-secondary-container/5 transition-colors cursor-pointer group" onclick="toggleResultEntry('L-88219')">
+<td class="px-lg py-4 font-label-md text-primary">#L-88219</td>
+<td class="px-lg py-4 font-body-md font-semibold">Abena Oforiwaa</td>
+<td class="px-lg py-4 font-body-sm">Malaria RDT</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-error-container text-on-error-container rounded-full text-[12px] font-bold uppercase tracking-wider">Urgent</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-body-sm font-label-md">Pending</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">arrow_forward_ios</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-secondary-container/5 transition-colors cursor-pointer group" onclick="toggleResultEntry('L-88220')">
+<td class="px-lg py-4 font-label-md text-primary">#L-88220</td>
+<td class="px-lg py-4 font-body-md font-semibold">Kofi Annan</td>
+<td class="px-lg py-4 font-body-sm">FBC (Full Blood Count)</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-[12px] font-bold uppercase tracking-wider">Routine</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-body-sm font-label-md">Sample Collected</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">arrow_forward_ios</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-secondary-container/5 transition-colors cursor-pointer group" onclick="toggleResultEntry('L-88221')">
+<td class="px-lg py-4 font-label-md text-primary">#L-88221</td>
+<td class="px-lg py-4 font-body-md font-semibold">Sarah Boakye</td>
+<td class="px-lg py-4 font-body-sm">Blood Glucose</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-[12px] font-bold uppercase tracking-wider">Routine</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-body-sm font-label-md">Pending</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">arrow_forward_ios</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Result Entry Form (Sidebar/Dynamic Section) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest rounded-xl border border-primary/20 shadow-lg overflow-hidden hidden transition-all" id="result-entry-panel">
+<div class="bg-primary/5 p-lg border-b border-outline-variant">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-1">Result Entry</h4>
+<p class="font-label-md text-label-md text-on-surface-variant" id="selected-test-id">#L-88219 | Abena Oforiwaa</p>
+</div>
+<button class="p-1 hover:bg-error-container rounded-full text-on-surface-variant hover:text-error transition-all" onclick="closeResultEntry()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="p-lg space-y-lg">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface">Test Results (Numeric/Scale)</label>
+<div class="grid grid-cols-2 gap-md">
+<div class="relative">
+<input class="w-full p-4 border border-outline rounded-lg focus:ring-2 focus:ring-primary-container outline-none font-headline-sm" placeholder="Value" type="text"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-on-surface-variant">g/dL</span>
+</div>
+<div class="relative">
+<select class="w-full p-4 border border-outline rounded-lg focus:ring-2 focus:ring-primary-container outline-none bg-surface-container-lowest">
+<option>Negative</option>
+<option>Positive (+)</option>
+<option>Positive (++)</option>
+<option>Reactive</option>
+</select>
+</div>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface">Laboratory Technologist Notes</label>
+<textarea class="w-full p-4 border border-outline rounded-lg focus:ring-2 focus:ring-primary-container outline-none" placeholder="Observation notes..." rows="4"></textarea>
+</div>
+<div class="p-md bg-secondary-container/10 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">info</span>
+<p class="text-xs text-on-secondary-container">Results will be automatically synced with patient's EHR and accessible to Dr. Kwaku Mensah.</p>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-headline-sm rounded-xl hover:shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">save</span>
+                                Validate &amp; Finalize
+                            </button>
+</div>
+</div>
+<!-- Lab Analytics Placeholder Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="flex items-center gap-2 mb-lg">
+<span class="material-symbols-outlined text-secondary">analytics</span>
+<h4 class="font-label-md text-label-md">Facility Statistics</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Turnaround Time (Avg)</span>
+<span class="font-label-md">45 mins</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Equipment Calibration</span>
+<span class="font-label-md text-primary">Healthy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Completed Results Table -->
+<div class="lg:col-span-12 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden mt- gutter">
+<div class="p-lg bg-surface-container-low border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary font-bold">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm">Completed Results History</h3>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+<span class="text-xs font-label-md">Linked to Profile</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface/50 border-b border-outline-variant">
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Reference</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Patient</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Test performed</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Result Value</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Timestamp</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 text-primary font-bold">#L-88210</td>
+<td class="px-lg py-4">
+<div class="flex flex-col">
+<span class="font-semibold">Musa Iddrisu</span>
+<span class="text-xs text-on-surface-variant">ID: 0092-23</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm">Hemoglobin (Hb)</td>
+<td class="px-lg py-4"><span class="font-bold">14.2 g/dL</span> <span class="text-xs text-primary">(Normal)</span></td>
+<td class="px-lg py-4 text-xs font-label-md">Today, 09:12 AM</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-xs font-bold uppercase tracking-tight">Profile Linked</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 text-primary font-bold">#L-88208</td>
+<td class="px-lg py-4">
+<div class="flex flex-col">
+<span class="font-semibold">Mary Appiah</span>
+<span class="text-xs text-on-surface-variant">ID: 1144-23</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm">Malaria RDT</td>
+<td class="px-lg py-4"><span class="font-bold">Positive (+)</span></td>
+<td class="px-lg py-4 text-xs font-label-md">Today, 08:45 AM</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-xs font-bold uppercase tracking-tight">Profile Linked</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-4 text-primary font-bold">#L-88205</td>
+<td class="px-lg py-4">
+<div class="flex flex-col">
+<span class="font-semibold">John Dumelo</span>
+<span class="text-xs text-on-surface-variant">ID: 0542-23</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm">Urinalysis</td>
+<td class="px-lg py-4"><span class="font-bold text-error">Abnormal</span></td>
+<td class="px-lg py-4 text-xs font-label-md">Yesterday, 04:30 PM</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-xs font-bold uppercase tracking-tight">Profile Linked</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden by default unless on specific screens, but useful for quick test entry) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[32px]">class</span>
+</button>
+<script>
+        function toggleResultEntry(testId) {
+            const panel = document.getElementById('result-entry-panel');
+            const label = document.getElementById('selected-test-id');
+            
+            // Simulating patient data based on click
+            const data = {
+                'L-88219': '#L-88219 | Abena Oforiwaa',
+                'L-88220': '#L-88220 | Kofi Annan',
+                'L-88221': '#L-88221 | Sarah Boakye'
+            };
+
+            label.innerText = data[testId];
+            panel.classList.remove('hidden');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function closeResultEntry() {
+            document.getElementById('result-entry-panel').classList.add('hidden');
+        }
+    </script>
+</body></html>

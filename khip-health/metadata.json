@@ -1,0 +1,6 @@
+{
+  "name": "KHIP Health",
+  "description": "Municipal Health Administration and Patient Encounter Dashboard for Kwadaso Community Hospital",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

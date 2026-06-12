@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Patient Management | KHIP Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1cab0;
+            border-radius: 10px;
+        }
+        .modal-overlay {
+            background: rgba(25, 28, 30, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ddb1e",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#001b7d",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-container": "#00597f",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#8edc1f",
+                        "tertiary-fixed": "#c8e6ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#3a53c9",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "tertiary": "#006590",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001159",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#8acfff",
+                        "tertiary-fixed-dim": "#88ceff",
+                        "on-primary-fixed-variant": "#2f4f00",
+                        "outline-variant": "#c1cab0",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#1c38b1",
+                        "primary-fixed": "#a8f93f",
+                        "primary": "#406900",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7087ff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#8ddb1e",
+                        "on-primary-container": "#375d00",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#406900",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#414a36",
+                        "outline": "#717a64",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#102000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dee1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-padding": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">KHIP Health</h1>
+<p class="text-on-surface-variant text-label-md">Municipal Health Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-md text-label-md">Patient Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-md text-label-md">Lab Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-md text-label-md">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-label-md text-label-md">Referrals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto px-2 space-y-1">
+<button class="w-full mb-4 flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md hover:opacity-90 transition-all" onclick="toggleModal('registerModal')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                Register Patient
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant h-16 px-lg flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-lg flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-body-md focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant" placeholder="Search by name, ID, or facility..." type="text"/>
+</div>
+<div class="flex items-center gap-4 border-l border-outline-variant pl-4">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md" href="#">Directory</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md transition-all" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-md hover:scale-95 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                    New Encounter
+                </button>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all"><span class="material-symbols-outlined">help_outline</span></button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw6VibLoEXimBEulan85-wphCN712t0KdoHzjcHzwcC8oIsKVu7zxscErGtEvTqScgEguEo8d-f-fffI9o39rgTT660dbBEWKgEJLH5SZd4DwvloD_XuSiBZXuZNJLU0ZQKgMKgdl6TpoqF8Snb212bVtchwxH4rcos28WoedRmaf0hw6cuQDulGOCKiNJYkLtAyRfccFjUmczDgR0IaLnW9hFwHr1vGYg8ScoUqlLc4XCw5ezRYYDpHQZovILhhbSdq0OYKUZQJs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="pt-24 px-lg pb-xl">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Patient Records</h2>
+<p class="text-on-surface-variant font-body-md">Manage and view municipality health service seekers.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline text-on-surface font-label-md rounded-lg hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        Filters
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline text-on-surface font-label-md rounded-lg hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Export List
+                    </button>
+</div>
+</div>
+<!-- Bento Statistics (Summary Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<span class="text-on-surface-variant font-label-md mb-2">Total Patients</span>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-md font-bold text-on-surface">12,482</span>
+<span class="text-primary font-bold text-xs">+3.2%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<span class="text-on-surface-variant font-label-md mb-2">Active Visits Today</span>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-md font-bold text-on-surface">142</span>
+<span class="text-secondary font-bold text-xs">Live</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<span class="text-on-surface-variant font-label-md mb-2">New Registrations</span>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-md font-bold text-on-surface">48</span>
+<span class="text-on-surface-variant text-xs">this week</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<span class="text-on-surface-variant font-label-md mb-2">Pending Clearances</span>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-md font-bold text-on-surface">09</span>
+<span class="text-error font-bold text-xs">High</span>
+</div>
+</div>
+</div>
+<!-- Patient List Table Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-low border-b border-outline-variant z-10">
+<tr>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Patient ID</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Full Name</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Gender / Age</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Facility</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Last Visit</th>
+<th class="px-lg py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-body-md font-bold text-primary">KHIP-24-0012</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold text-xs">OA</div>
+<div>
+<div class="font-label-md text-on-surface">Osei Appiah</div>
+<div class="text-xs text-on-surface-variant">+233 24 555 0192</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 font-body-md">Male, 34y</td>
+<td class="px-lg py-4 font-body-md">Kwadaso General</td>
+<td class="px-lg py-4 font-body-md">Oct 24, 2023</td>
+<td class="px-lg py-4 text-right space-x-2">
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all" title="View Profile">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary-container hover:text-on-secondary-container transition-all" title="New Encounter">
+<span class="material-symbols-outlined text-[20px]">add_notes</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-body-md font-bold text-primary">KHIP-24-1056</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold text-xs">EA</div>
+<div>
+<div class="font-label-md text-on-surface">Elizabeth Amankwah</div>
+<div class="text-xs text-on-surface-variant">+233 50 112 3344</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 font-body-md">Female, 28y</td>
+<td class="px-lg py-4 font-body-md">SDA Hospital</td>
+<td class="px-lg py-4 font-body-md">Nov 02, 2023</td>
+<td class="px-lg py-4 text-right space-x-2">
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all" title="View Profile">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary-container hover:text-on-secondary-container transition-all" title="New Encounter">
+<span class="material-symbols-outlined text-[20px]">add_notes</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-body-md font-bold text-primary">KHIP-23-9982</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-xs">KM</div>
+<div>
+<div class="font-label-md text-on-surface">Kofi Mensah</div>
+<div class="text-xs text-on-surface-variant">+233 55 990 8821</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 font-body-md">Male, 52y</td>
+<td class="px-lg py-4 font-body-md">Agric Clinic</td>
+<td class="px-lg py-4 font-body-md">Oct 12, 2023</td>
+<td class="px-lg py-4 text-right space-x-2">
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all" title="View Profile">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary-container hover:text-on-secondary-container transition-all" title="New Encounter">
+<span class="material-symbols-outlined text-[20px]">add_notes</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-body-md font-bold text-primary">KHIP-24-2144</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error font-bold text-xs">YD</div>
+<div>
+<div class="font-label-md text-on-surface">Yaa Danso</div>
+<div class="text-xs text-on-surface-variant">+233 24 112 0099</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 font-body-md">Female, 62y</td>
+<td class="px-lg py-4 font-body-md">Kwadaso General</td>
+<td class="px-lg py-4 font-body-md">Today</td>
+<td class="px-lg py-4 text-right space-x-2">
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all" title="View Profile">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary-container hover:text-on-secondary-container transition-all" title="New Encounter">
+<span class="material-symbols-outlined text-[20px]">add_notes</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-body-md font-bold text-primary">KHIP-24-3001</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">JK</div>
+<div>
+<div class="font-label-md text-on-surface">John Kusi</div>
+<div class="text-xs text-on-surface-variant">+233 20 887 6655</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 font-body-md">Male, 12y</td>
+<td class="px-lg py-4 font-body-md">North Kwadaso HC</td>
+<td class="px-lg py-4 font-body-md">Yesterday</td>
+<td class="px-lg py-4 text-right space-x-2">
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-all" title="View Profile">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="inline-flex items-center justify-center w-8 h-8 rounded-full hover:bg-secondary-container hover:text-on-secondary-container transition-all" title="New Encounter">
+<span class="material-symbols-outlined text-[20px]">add_notes</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-lg py-4 border-t border-outline-variant flex justify-between items-center bg-surface-container-low">
+<span class="text-body-sm text-on-surface-variant">Showing 1 to 5 of 12,482 patients</span>
+<div class="flex gap-2">
+<button class="p-2 border border-outline rounded-lg hover:bg-surface-container-high transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded-lg font-label-md">1</button>
+<button class="px-3 py-1 border border-outline rounded-lg hover:bg-surface-container-high font-label-md">2</button>
+<button class="px-3 py-1 border border-outline rounded-lg hover:bg-surface-container-high font-label-md">3</button>
+<span class="px-1">...</span>
+<button class="px-3 py-1 border border-outline rounded-lg hover:bg-surface-container-high font-label-md">2497</button>
+<button class="p-2 border border-outline rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Registration Modal -->
+<div class="fixed inset-0 z-[100] hidden" id="registerModal">
+<div class="modal-overlay absolute inset-0"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-2xl p-0 overflow-hidden">
+<div class="flex justify-between items-center px-lg py-4 bg-surface-container border-b border-outline-variant">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">New Patient Registration</h3>
+<button class="p-2 hover:bg-surface-container-highest rounded-full" onclick="toggleModal('registerModal')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-lg">
+<div class="grid grid-cols-2 gap-lg mb-lg">
+<div class="col-span-2">
+<label class="block text-label-md text-on-surface-variant mb-2">Full Legal Name</label>
+<input class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="Firstname Middlename Surname" type="text"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant mb-2">Date of Birth</label>
+<input class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary" type="date"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant mb-2">Gender</label>
+<select class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary">
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant mb-2">Ghana Card ID / NHIS</label>
+<input class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="GHA-XXXXXXXXX-X" type="text"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant mb-2">Phone Number</label>
+<input class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="+233" type="tel"/>
+</div>
+<div class="col-span-2">
+<label class="block text-label-md text-on-surface-variant mb-2">Residential Address</label>
+<input class="w-full border-outline-variant rounded-lg p-3 focus:ring-primary focus:border-primary" placeholder="House Number, Street Name, Neighborhood" type="text"/>
+</div>
+</div>
+<div class="flex justify-end gap-3 pt-4 border-t border-outline-variant">
+<button class="px-6 py-2 text-on-surface-variant font-label-md hover:bg-surface-container-low rounded-lg transition-all" onclick="toggleModal('registerModal')" type="button">Cancel</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-label-md rounded-lg shadow-sm hover:opacity-90 transition-all" type="submit">Save Record</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // Close modal on escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('registerModal');
+                if (!modal.classList.contains('hidden')) toggleModal('registerModal');
+            }
+        });
+
+        // Simple row hover effect enhancement
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.cursor = 'pointer';
+            });
+        });
+    </script>
+</body></html>

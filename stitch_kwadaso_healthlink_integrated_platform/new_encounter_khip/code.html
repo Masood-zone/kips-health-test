@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Encounter | KHIP Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ddb1e",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#001b7d",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-container": "#00597f",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#8edc1f",
+                        "tertiary-fixed": "#c8e6ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#3a53c9",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "tertiary": "#006590",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001159",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#8acfff",
+                        "tertiary-fixed-dim": "#88ceff",
+                        "on-primary-fixed-variant": "#2f4f00",
+                        "outline-variant": "#c1cab0",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#1c38b1",
+                        "primary-fixed": "#a8f93f",
+                        "primary": "#406900",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7087ff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#8ddb1e",
+                        "on-primary-container": "#375d00",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#406900",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#414a36",
+                        "outline": "#717a64",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#102000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dee1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-padding": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .step-active { color: #406900; }
+        .step-inactive { color: #717a64; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar (Suppressed for focused task, but kept as identity anchor if needed in Shell layout) -->
+<!-- Applying "Shell Visibility & Relevance" rule: suppressed because this is a focused task-focused sub-page -->
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+<!-- TopAppBar (Modified for focused encounter view) -->
+<header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-16 px-lg w-full sticky top-0 z-40">
+<div class="flex items-center gap-md">
+<button aria-label="Close Encounter" class="p-2 hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-secondary">New Encounter: Amara Boateng</h1>
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded-lg text-xs font-bold uppercase tracking-wider">NKDA / Latex Allergy</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined">patient_list</span>
+<span class="font-label-md text-label-md">ID: KH-2024-9982</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-2 rounded-full font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all">
+                    Finalize Encounter
+                </button>
+</div>
+</header>
+<!-- Main Workspace: 2-Column (Sidebar for History + Main Form) -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Left Panel: Visit History & Reference -->
+<aside class="w-80 border-r border-outline-variant bg-surface-container-lowest overflow-y-auto p-lg flex flex-col gap-lg">
+<section>
+<h2 class="font-label-md text-label-md text-primary mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                        Visit History
+                    </h2>
+<div class="space-y-md">
+<!-- History Card -->
+<div class="p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-secondary transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-md text-label-md text-secondary">Oct 12, 2023</span>
+<span class="text-[10px] bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded">OPD</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold mb-1">Malaria Follow-up</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 italic">"Patient reports mild headache persists..."</p>
+</div>
+<!-- History Card -->
+<div class="p-md bg-surface-container-low rounded-xl border border-outline-variant hover:border-secondary transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<span class="font-label-md text-label-md text-secondary">Aug 05, 2023</span>
+<span class="text-[10px] bg-tertiary-container text-on-tertiary-container px-1.5 py-0.5 rounded">Lab</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold mb-1">Routine Blood Work</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Glucose: 5.4 mmol/L, HbA1c: 6.1%...</p>
+</div>
+</div>
+</section>
+<section>
+<h2 class="font-label-md text-label-md text-primary mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">medical_information</span>
+                        Patient Stats
+                    </h2>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-secondary-container/20 p-sm rounded-lg border border-secondary-container/30">
+<p class="text-[10px] uppercase text-on-secondary-container">Last Weight</p>
+<p class="font-headline-sm text-headline-sm text-secondary">68kg</p>
+</div>
+<div class="bg-secondary-container/20 p-sm rounded-lg border border-secondary-container/30">
+<p class="text-[10px] uppercase text-on-secondary-container">Last BP</p>
+<p class="font-headline-sm text-headline-sm text-secondary">120/80</p>
+</div>
+</div>
+</section>
+<img class="w-full h-32 object-cover rounded-xl mt-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-500" data-alt="A professional medical digital interface screen displaying detailed patient analytics and historical health trends. The color palette features deep blues and clean whites with vibrant lime green accents. Soft studio lighting reflects off the clean glass surface of the monitor in a modern community health center in Africa. The atmosphere is professional, reliable, and high-tech." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCTqvNOYM40ziyYIur4FFRiNNobTuA3CexfZOZq3DfNV1xilG2vgqpBk9dLMQxzEQA1sSFj-J-thWxihK_nRRbYtaXotTqBfS8Cbl9oAuEloVueiJvz9va-LitRrr4Fuf5X3m5aqCMf5Qo8VKOjpqM5LbMC9pCtR5nxbg3m01c8-n5S8JEI3L6FXsAiKu1eVqSNGDNHHa8-dR5ez-gcEVUzBRrRlQVuEeugT6t6hnsqXsUj09mncHzhYtiZJUyUx_Fw0gDORJDfXQ"/>
+</aside>
+<!-- Right Panel: The Multi-Step Form -->
+<section class="flex-1 overflow-y-auto bg-surface p-lg">
+<div class="max-w-4xl mx-auto">
+<!-- Form Navigation Steps -->
+<nav class="flex justify-between mb-xl border-b border-outline-variant pb-md">
+<button class="flex flex-col items-center gap-xs transition-colors step-active" id="btn-vitals" onclick="switchTab('vitals')">
+<span class="material-symbols-outlined">vital_signs</span>
+<span class="font-label-md text-label-md">Vitals</span>
+</button>
+<div class="h-px bg-outline-variant flex-1 self-center mx-md mt-[-20px]"></div>
+<button class="flex flex-col items-center gap-xs transition-colors step-inactive" id="btn-soap" onclick="switchTab('soap')">
+<span class="material-symbols-outlined">notes</span>
+<span class="font-label-md text-label-md">SOAP Notes</span>
+</button>
+<div class="h-px bg-outline-variant flex-1 self-center mx-md mt-[-20px]"></div>
+<button class="flex flex-col items-center gap-xs transition-colors step-inactive" id="btn-diagnosis" onclick="switchTab('diagnosis')">
+<span class="material-symbols-outlined">stethoscope</span>
+<span class="font-label-md text-label-md">Diagnosis</span>
+</button>
+<div class="h-px bg-outline-variant flex-1 self-center mx-md mt-[-20px]"></div>
+<button class="flex flex-col items-center gap-xs transition-colors step-inactive" id="btn-treatment" onclick="switchTab('treatment')">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-label-md text-label-md">Treatment</span>
+</button>
+</nav>
+<!-- STEP 1: VITALS -->
+<div class="tab-content active animate-in fade-in slide-in-from-bottom-4 duration-500" id="vitals">
+<div class="flex items-center gap-md mb-lg">
+<div class="bg-primary-container p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-primary-container">speed</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Patient Vitals</h2>
+<p class="text-on-surface-variant font-body-sm">Capture current baseline metrics for the visit.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant">
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-primary">Weight (kg)</label>
+<input class="h-14 px-md rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-headline-sm font-headline-sm" placeholder="e.g. 70.5" step="0.1" type="number"/>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-primary">Height (cm)</label>
+<input class="h-14 px-md rounded-xl border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-headline-sm font-headline-sm" placeholder="e.g. 175" type="number"/>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-primary">Blood Pressure (mmHg)</label>
+<div class="flex items-center gap-sm">
+<input class="h-14 w-full px-md rounded-xl border border-outline focus:border-primary outline-none text-headline-sm font-headline-sm" placeholder="Sys" type="text"/>
+<span class="text-headline-md text-outline">/</span>
+<input class="h-14 w-full px-md rounded-xl border border-outline focus:border-primary outline-none text-headline-sm font-headline-sm" placeholder="Dia" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-primary">Heart Rate (bpm)</label>
+<input class="h-14 px-md rounded-xl border border-outline focus:border-primary outline-none text-headline-sm font-headline-sm" placeholder="72" type="number"/>
+</div>
+<div class="flex flex-col gap-sm md:col-span-2">
+<label class="font-label-md text-label-md text-primary">Temperature (°C)</label>
+<input class="h-14 px-md rounded-xl border border-outline focus:border-primary outline-none text-headline-sm font-headline-sm" placeholder="36.6" step="0.1" type="number"/>
+</div>
+</div>
+<div class="mt-xl flex justify-end">
+<button class="bg-secondary text-on-secondary px-xl py-3 rounded-full font-label-md text-label-md flex items-center gap-sm hover:shadow-lg transition-all" onclick="switchTab('soap')">
+                                Next: Clinical Notes
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 2: SOAP NOTES -->
+<div class="tab-content animate-in fade-in slide-in-from-right-4 duration-500" id="soap">
+<div class="flex items-center gap-md mb-lg">
+<div class="bg-tertiary-container p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-tertiary-container">edit_document</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-tertiary">SOAP Format Notes</h2>
+<p class="text-on-surface-variant font-body-sm">Subjective, Objective, Assessment, and Plan.</p>
+</div>
+</div>
+<div class="space-y-lg">
+<div class="p-lg bg-surface-container-lowest rounded-2xl border border-outline-variant">
+<label class="font-label-md text-label-md text-secondary block mb-md">Subjective (Symptoms &amp; Chief Complaints)</label>
+<textarea class="w-full p-md rounded-xl border border-outline focus:border-secondary outline-none font-body-md" placeholder="Enter patient's reported symptoms..." rows="4"></textarea>
+</div>
+<div class="p-lg bg-surface-container-lowest rounded-2xl border border-outline-variant">
+<label class="font-label-md text-label-md text-secondary block mb-md">Objective (Physical Findings)</label>
+<textarea class="w-full p-md rounded-xl border border-outline focus:border-secondary outline-none font-body-md" placeholder="Enter clinical observations..." rows="4"></textarea>
+</div>
+</div>
+<div class="mt-xl flex justify-between">
+<button class="text-secondary font-label-md text-label-md flex items-center gap-sm px-lg py-3 hover:bg-surface-container-low rounded-full transition-all" onclick="switchTab('vitals')">
+<span class="material-symbols-outlined">arrow_back</span>
+                                Back to Vitals
+                            </button>
+<button class="bg-secondary text-on-secondary px-xl py-3 rounded-full font-label-md text-label-md flex items-center gap-sm hover:shadow-lg transition-all" onclick="switchTab('diagnosis')">
+                                Next: Diagnosis
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 3: DIAGNOSIS -->
+<div class="tab-content animate-in fade-in slide-in-from-right-4 duration-500" id="diagnosis">
+<div class="flex items-center gap-md mb-lg">
+<div class="bg-secondary-container p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-secondary-container">search_check</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-secondary">Diagnosis (ICD-10)</h2>
+<p class="text-on-surface-variant font-body-sm">Search and assign clinical codes.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant">
+<div class="relative mb-lg">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-16 pl-xl pr-md rounded-xl border border-outline focus:border-secondary outline-none font-body-md" placeholder="Search by name or ICD-10 code (e.g. Malaria, B54)" type="text"/>
+</div>
+<h3 class="font-label-md text-label-md text-outline mb-md">Selected Diagnoses</h3>
+<div class="space-y-sm">
+<div class="flex justify-between items-center p-md bg-secondary-container/10 rounded-xl border border-secondary/20">
+<div>
+<p class="font-label-md text-label-md text-secondary">B54.9 - Unspecified Malaria</p>
+<p class="text-xs text-on-surface-variant">Primary Diagnosis</p>
+</div>
+<button class="text-error"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+</div>
+<div class="mt-xl flex justify-between">
+<button class="text-secondary font-label-md text-label-md flex items-center gap-sm px-lg py-3 hover:bg-surface-container-low rounded-full transition-all" onclick="switchTab('soap')">
+<span class="material-symbols-outlined">arrow_back</span>
+                                Back to Notes
+                            </button>
+<button class="bg-secondary text-on-secondary px-xl py-3 rounded-full font-label-md text-label-md flex items-center gap-sm hover:shadow-lg transition-all" onclick="switchTab('treatment')">
+                                Next: Treatment Plan
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 4: TREATMENT PLAN -->
+<div class="tab-content animate-in fade-in slide-in-from-right-4 duration-500" id="treatment">
+<div class="flex items-center gap-md mb-lg">
+<div class="bg-primary-container p-3 rounded-2xl">
+<span class="material-symbols-outlined text-on-primary-container">medical_services</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Treatment &amp; Prescriptions</h2>
+<p class="text-on-surface-variant font-body-sm">Medications, dosages, and follow-up orders.</p>
+</div>
+</div>
+<div class="space-y-xl">
+<section>
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-sm text-headline-sm">Medications</h3>
+<button class="flex items-center gap-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined">add_circle</span>
+                                        Add Drug
+                                    </button>
+</div>
+<div class="overflow-hidden rounded-2xl border border-outline-variant bg-surface-container-lowest">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Drug Name</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Dosage</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Frequency</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Duration</th>
+<th class="p-md"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr>
+<td class="p-md font-body-md">Artemether-lumefantrine</td>
+<td class="p-md font-body-md">20/120mg</td>
+<td class="p-md font-body-md">BD (Twice Daily)</td>
+<td class="p-md font-body-md">3 Days</td>
+<td class="p-md text-right"><button class="text-outline hover:text-error"><span class="material-symbols-outlined">close</span></button></td>
+</tr>
+<tr>
+<td class="p-md font-body-md">Paracetamol</td>
+<td class="p-md font-body-md">500mg</td>
+<td class="p-md font-body-md">TID (Thrice Daily)</td>
+<td class="p-md font-body-md">5 Days</td>
+<td class="p-md text-right"><button class="text-outline hover:text-error"><span class="material-symbols-outlined">close</span></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h3 class="font-headline-sm text-headline-sm mb-md">Follow-up Instructions</h3>
+<textarea class="w-full p-md rounded-2xl border border-outline focus:border-primary outline-none font-body-md bg-surface-container-lowest" placeholder="Additional instructions for the patient..." rows="3"></textarea>
+</section>
+</div>
+<div class="mt-xl flex justify-between">
+<button class="text-secondary font-label-md text-label-md flex items-center gap-sm px-lg py-3 hover:bg-surface-container-low rounded-full transition-all" onclick="switchTab('diagnosis')">
+<span class="material-symbols-outlined">arrow_back</span>
+                                Back to Diagnosis
+                            </button>
+<button class="bg-primary text-on-primary px-xl py-4 rounded-full font-headline-sm text-headline-sm flex items-center gap-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">check_circle</span>
+                                Finalize Visit &amp; Print
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual Toast Notification Placeholder (Interaction layer) -->
+<div class="fixed bottom-lg right-lg translate-y-20 opacity-0 bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-xl shadow-xl transition-all duration-300 flex items-center gap-md z-50" id="toast">
+<span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span>
+<span class="font-label-md text-label-md">Entry saved automatically</span>
+</div>
+<script>
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected
+            document.getElementById(tabId).classList.add('active');
+
+            // Update nav buttons
+            const steps = ['vitals', 'soap', 'diagnosis', 'treatment'];
+            steps.forEach(step => {
+                const btn = document.getElementById('btn-' + step);
+                if (step === tabId) {
+                    btn.classList.remove('step-inactive');
+                    btn.classList.add('step-active');
+                } else {
+                    btn.classList.remove('step-active');
+                    btn.classList.add('step-inactive');
+                }
+            });
+
+            // Trigger auto-save toast simulation
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Form Auto-save logic (Visual micro-interaction)
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('blur', () => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 1500);
+            });
+        });
+    </script>
+</body></html>

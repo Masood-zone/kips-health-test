@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KHIP Health | User &amp; Facility Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            font-weight: 600;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ddb1e",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#001b7d",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-container": "#00597f",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#8edc1f",
+                        "tertiary-fixed": "#c8e6ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#3a53c9",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "tertiary": "#006590",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001159",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#8acfff",
+                        "tertiary-fixed-dim": "#88ceff",
+                        "on-primary-fixed-variant": "#2f4f00",
+                        "outline-variant": "#c1cab0",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#1c38b1",
+                        "primary-fixed": "#a8f93f",
+                        "primary": "#406900",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7087ff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#8ddb1e",
+                        "on-primary-container": "#375d00",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#406900",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#414a36",
+                        "outline": "#717a64",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#102000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dee1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-padding": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant shadow-sm z-50 flex flex-col py-lg">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary">KHIP Health</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Municipal Health Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-label-md text-label-md">Patient Records</span>
+</a>
+<!-- Active Navigation for Settings/Management context -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-md text-label-md">Lab Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-md text-label-md">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-label-md text-label-md">Referrals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto px-lg pt-lg border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">person_add</span>
+                Register Patient
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 mt-4 text-error font-label-md text-label-md hover:bg-error-container/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center h-16 px-lg">
+<div class="flex items-center gap-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-80 text-body-md focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search facilities or staff..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center gap-lg ml-lg">
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" href="#">Directory</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" href="#">Resources</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md text-on-surface">Admin Kwame</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Municipal Lead</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold overflow-hidden border-2 border-outline-variant">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC606mn4h7gbLwg0r3gpi5nL3fiMBLCD5c2h-xUyO1yi_XuaLyYIfCLSEyX6Clo4_H-Puzar-zu66c0k7hB1OyKLPkBzgOwxaYIQy13eN01XKlZLUKDQtgfYXMqZMGhrlHETZGUo1lzeA4hqeKdVSjT1kI6rnHkY1rYPdksToMhCS7Ad_GlTLXn1HiNAraWV6z6Mnw9lsOaoSAL-2plgwjgGL1P3rKjt5Lzk0LKQMGHrVetLXqJ6W4kfG7q_vJ5ryQGWe_4rWL3Hj4"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Area -->
+<div class="pt-24 px-lg pb-xl space-y-lg">
+<!-- Welcome Header -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Administrative Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Managing 12 health facilities and 148 staff members in Kwadaso Municipality.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-lg py-3 border-2 border-secondary text-secondary font-label-md text-label-md rounded-xl hover:bg-secondary/5 transition-all">
+<span class="material-symbols-outlined">domain_add</span>
+                        New Facility
+                    </button>
+<button class="flex items-center gap-2 px-lg py-3 bg-primary text-on-primary font-label-md text-label-md rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">person_add_alt</span>
+                        Invite New User
+                    </button>
+</div>
+</section>
+<!-- Grid: Facilities Section (Asymmetric Cards) -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Health Facilities</h3>
+<button class="text-secondary font-label-md text-label-md flex items-center gap-1 hover:underline">
+                        View Map Directory <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-lg">
+<!-- Facility Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">local_hospital</span>
+</div>
+<div class="flex justify-between items-start mb-md">
+<div class="h-12 w-12 rounded-xl bg-primary-container/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">festival</span>
+</div>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase">Main Center</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Kwadaso Polyclinic</h4>
+<p class="text-body-sm text-on-surface-variant mb-lg">Municipal Hub &amp; Referral Point</p>
+<div class="grid grid-cols-2 gap-md pt-md border-t border-outline-variant">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Staff</p>
+<p class="text-headline-sm font-black text-secondary">42</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Patients (MoM)</p>
+<p class="text-headline-sm font-black text-tertiary">+12%</p>
+</div>
+</div>
+</div>
+<!-- Facility Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-md">
+<div class="h-12 w-12 rounded-xl bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">medical_information</span>
+</div>
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-[10px] font-bold uppercase">CHPS Zone</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Apatrapa CHPS</h4>
+<p class="text-body-sm text-on-surface-variant mb-lg">Community Outreach Focused</p>
+<div class="grid grid-cols-2 gap-md pt-md border-t border-outline-variant">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Staff</p>
+<p class="text-headline-sm font-black text-secondary">08</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Vaccinations</p>
+<p class="text-headline-sm font-black text-tertiary">89%</p>
+</div>
+</div>
+</div>
+<!-- Facility Card 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-2xl border border-outline-variant shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+<div class="flex justify-between items-start mb-md">
+<div class="h-12 w-12 rounded-xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">blind</span>
+</div>
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-[10px] font-bold uppercase">Health Center</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Nwamase Health Center</h4>
+<p class="text-body-sm text-on-surface-variant mb-lg">Maternal &amp; Child Health</p>
+<div class="grid grid-cols-2 gap-md pt-md border-t border-outline-variant">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Staff</p>
+<p class="text-headline-sm font-black text-secondary">15</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Bed Cap.</p>
+<p class="text-headline-sm font-black text-tertiary">12/20</p>
+</div>
+</div>
+</div>
+<!-- Facility Stats Summary (Bento Style) -->
+<div class="bg-secondary p-lg rounded-2xl shadow-lg flex flex-col justify-between text-on-secondary">
+<div>
+<span class="material-symbols-outlined text-4xl mb-2">monitoring</span>
+<h4 class="font-headline-sm text-headline-sm leading-tight">System Performance</h4>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span>Connectivity</span>
+<span class="font-bold">99.8%</span>
+</div>
+<div class="w-full bg-white/20 h-1 rounded-full">
+<div class="bg-primary-container h-1 rounded-full w-[99.8%]"></div>
+</div>
+<p class="text-[10px] opacity-80">All facilities online and syncing.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Table: User Management Section -->
+<section class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="px-lg py-lg border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Manage Staff Members</h3>
+<p class="text-body-sm text-on-surface-variant">Update roles, assignments, and access levels for municipal personnel.</p>
+</div>
+<div class="flex items-center gap-sm">
+<select class="bg-surface-container-low border-outline-variant rounded-lg text-label-md py-2 px-3 focus:ring-primary">
+<option>All Roles</option>
+<option>Doctor</option>
+<option>Nurse</option>
+<option>Admin</option>
+</select>
+<select class="bg-surface-container-low border-outline-variant rounded-lg text-label-md py-2 px-3 focus:ring-primary">
+<option>All Facilities</option>
+<option>Kwadaso Polyclinic</option>
+<option>Apatrapa CHPS</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Staff Name</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Role</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Assigned Facility</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant">Status</th>
+<th class="px-lg py-4 font-label-md text-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- User Row 1 -->
+<tr class="hover:bg-primary-container/5 transition-colors group">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<img alt="Staff Portrait" class="h-10 w-10 rounded-full bg-outline-variant/20 border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy6F-CNRS8jxR0MWyJjMnHw99VfeL-uAVYZgIzWAOOejuF0KRDNLz5wg4YlIwqCaBYeb32WUMlfM2s-98T3pvNj0JlnYuDX0dz_wJ6gHnjrSdBZHLtka7co_2afiX9OEbZMl9Z69569A45qRyNroktCX7-TVgyhte4EdXcLXEW6-H03GWrB1Oy2pY-IgGVwyMA16pIS2YQWdQVbQIl4k70dVwTKviN6dti40690X2LhCk0MtlvL7VmrxS2vbc5JJDUz74lkJ5TcI"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Dr. Beatrice Osei</p>
+<p class="text-[12px] text-on-surface-variant">beatrice.o@khiphealth.gov</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-[12px] font-semibold">Doctor</span>
+</td>
+<td class="px-lg py-4">
+<p class="text-body-md text-on-surface">Kwadaso Polyclinic</p>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-body-sm font-medium">Active</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant" title="Edit User">
+<span class="material-symbols-outlined text-md">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant" title="Manage Permissions">
+<span class="material-symbols-outlined text-md">lock_open</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-primary-container/5 transition-colors group">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<img alt="Staff Portrait" class="h-10 w-10 rounded-full bg-outline-variant/20 border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuHKO438c016eN4PGrKo40UcgnDXWPd8Kff_SsvER2-WN4062CPJXJ11Ze41cXQgEH17w01eWbd_ddwXelq_tDPZWwQ7Y0YXHK4SD1GWx_ZqRG8uHdERbHDdCtiVIdcB0q2lJnshO8Fi45aOkal9Zx3gbbtN9bfEpzI59JrMOWgTCbvyygUqHNDxVokMHBRTpaQgGJgf3bWo2hlNem9CDPax-MAs6luzwLixLLT9ZYW_IuEixC5A-5QNlinr_pwa3J_gH6yqbuDTE"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Isaac Boateng</p>
+<p class="text-[12px] text-on-surface-variant">i.boateng@khiphealth.gov</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-primary-container/20 text-on-primary-container rounded-full text-[12px] font-semibold">Municipal Admin</span>
+</td>
+<td class="px-lg py-4">
+<p class="text-body-md text-on-surface">Municipal Health Directorate</p>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+<span class="text-body-sm font-medium">Active</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-md">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-md">lock_open</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-primary-container/5 transition-colors group">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-outline-variant/20 border border-outline-variant flex items-center justify-center text-on-surface-variant font-bold text-xs">MA</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Mary Appiah</p>
+<p class="text-[12px] text-on-surface-variant">m.appiah@khiphealth.gov</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-tertiary-container/20 text-on-tertiary-container rounded-full text-[12px] font-semibold">Nurse Midwife</span>
+</td>
+<td class="px-lg py-4">
+<p class="text-body-md text-on-surface">Apatrapa CHPS</p>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant opacity-60">
+<span class="w-2 h-2 bg-on-surface-variant rounded-full"></span>
+<span class="text-body-sm font-medium">On Leave</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-md">edit</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-md">lock_open</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User Row 4 (Pending Invite) -->
+<tr class="hover:bg-primary-container/5 transition-colors group">
+<td class="px-lg py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-surface-container-high border-dashed border border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">mail</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Dr. Samuel Kusi</p>
+<p class="text-[12px] text-on-surface-variant italic">Invite pending...</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-[12px] font-semibold">Doctor</span>
+</td>
+<td class="px-lg py-4">
+<p class="text-body-md text-on-surface">Nwamase Health Center</p>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-body-sm font-medium">Invited</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-3 py-1 text-[12px] font-bold text-secondary hover:bg-secondary/10 rounded-lg">Resend</button>
+<button class="p-2 hover:bg-error-container/20 rounded-lg text-error">
+<span class="material-symbols-outlined text-md">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-lg py-4 bg-surface-container-low/50 flex justify-between items-center">
+<p class="text-body-sm text-on-surface-variant">Showing 1-10 of 148 staff members</p>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bottom Contextual Stats / Insights -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bg-surface-container-low p-lg rounded-2xl border border-outline-variant flex items-center gap-lg">
+<div class="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-wider mb-1">Security Audit</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Last complete system-wide permission audit was completed 4 days ago by Municipal Admin.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-lg rounded-2xl border border-outline-variant flex items-center gap-lg">
+<div class="h-16 w-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">diversity_3</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-wider mb-1">Community Reach</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Staff are currently covering 100% of defined CHPS catchment zones in Kwadaso.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Visual Polish: Background Graphic -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-full opacity-5 pointer-events-none overflow-hidden">
+<svg class="w-full h-auto text-primary" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<path d="M47,-62.1C58.3,-50.2,63.1,-32.7,65.3,-15.8C67.4,1.1,66.8,17.4,59.3,30.3C51.8,43.2,37.3,52.6,22,58.8C6.6,65.1,-9.6,68.1,-25.2,64.2C-40.8,60.2,-55.8,49.2,-64.3,34.8C-72.8,20.4,-74.8,2.6,-70.5,-13.3C-66.2,-29.2,-55.7,-43.3,-42.6,-54.6C-29.6,-65.9,-14.8,-74.5,2.1,-77C19.1,-79.6,35.7,-74,47,-62.1Z" fill="currentColor" transform="translate(200 200)"></path>
+</svg>
+</div>
+</body></html>

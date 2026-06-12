@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Logs | KHIP Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ddb1e",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#001b7d",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-container": "#00597f",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#8edc1f",
+                        "tertiary-fixed": "#c8e6ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "secondary": "#3a53c9",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "tertiary": "#006590",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001159",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#8acfff",
+                        "tertiary-fixed-dim": "#88ceff",
+                        "on-primary-fixed-variant": "#2f4f00",
+                        "outline-variant": "#c1cab0",
+                        "surface": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#1c38b1",
+                        "primary-fixed": "#a8f93f",
+                        "primary": "#406900",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#7087ff",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#8ddb1e",
+                        "on-primary-container": "#375d00",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#406900",
+                        "surface-container-high": "#e6e8ea",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#414a36",
+                        "outline": "#717a64",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#102000",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#dee1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-padding": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-header { backdrop-filter: blur(12px); }
+        .audit-table-row:hover { background-color: #f2fce7; }
+        .status-pill { padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant bg-surface-container-lowest shadow-sm flex flex-col py-lg z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">KHIP Health</h1>
+<p class="text-sm text-on-surface-variant">Municipal Health Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="font-label-md text-label-md">Patient Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="font-label-md text-label-md">Lab Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="font-label-md text-label-md">Pharmacy</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="output">output</span>
+<span class="font-label-md text-label-md">Referrals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="px-4 mb-4">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined text-base">add</span>
+                Register Patient
+            </button>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="h-16 px-lg flex justify-between items-center bg-surface/80 glass-header sticky top-0 z-40 border-b border-outline-variant">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary text-body-md font-body-md" placeholder="Search logs, events, or users..." type="text"/>
+</div>
+<div class="flex gap-4">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Directory</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded-full font-label-md text-label-md hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                    New Encounter
+                </button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-tertiary-container overflow-hidden">
+<img alt="Dr. User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a community health administrator, a middle-aged Ghanaian man with a warm and authoritative expression, wearing a clinical white coat and a stethoscope around his neck, set against a soft-focus office background with high-key professional lighting and a modern health-tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAivbC5wErS_8uacE-Kg1BglhsfbmXxpk-sCgxmiXXWC5YFSRuYSIZN-8C3HSfJaPpJ_U3sG0JXpv88ZlhhVZ8je-LOy-j-DSMInpMM-pzUTfcVYb7g3p67w4HWbeNAnZW1xmpIYQaiGHr-IkQ3wXdAUOdSw-Gr1CEwITEs4KOgVLNTxIPVRdfEytgumQig_CbcjKoPLGv3PTAPLscQ69BemditKL91egK24hm3q_MFm3NxDL6sFCEZddtsCqjmm3AM4YZGkgZ4Oxg"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-lg space-y-lg">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">System Audit Logs</h2>
+<p class="text-body-md text-on-surface-variant">Review municipal compliance and track user activities across the facility.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 border border-outline px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Export CSV
+                    </button>
+<button class="flex items-center gap-2 border border-outline px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">print</span>
+                        Print Report
+                    </button>
+</div>
+</div>
+<!-- Advanced Filters Card -->
+<section class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">User / Staff Member</label>
+<select class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary">
+<option>All Staff</option>
+<option>Dr. Kwame Mensah</option>
+<option>Nurse Abena Addo</option>
+<option>Admin Sarah Jones</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Facility / Department</label>
+<select class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary">
+<option>All Departments</option>
+<option>General OPD</option>
+<option>Labor &amp; Delivery</option>
+<option>Pharmacy</option>
+<option>Laboratory</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Entity / Record ID</label>
+<input class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary" placeholder="PAT-2023-XXXX" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Date Range</label>
+<div class="flex items-center gap-2">
+<input class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-sm" type="date"/>
+<span class="text-on-surface-variant">—</span>
+<input class="w-full rounded-lg border-outline-variant focus:ring-primary focus:border-primary text-sm" type="date"/>
+</div>
+</div>
+<div class="md:col-span-4 flex justify-between items-center pt-2 border-t border-outline-variant">
+<div class="flex gap-2">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                            Role: Clinical Admin <button class="material-symbols-outlined text-xs">close</button>
+</span>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                            Date: Last 7 Days <button class="material-symbols-outlined text-xs">close</button>
+</span>
+</div>
+<div class="flex gap-3">
+<button class="text-on-surface-variant font-label-md text-label-md hover:underline">Clear all filters</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90">Apply Filters</button>
+</div>
+</div>
+</section>
+<!-- Audit Logs Table -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-secondary text-on-secondary">
+<tr>
+<th class="px-6 py-4 font-label-md text-label-md">Timestamp</th>
+<th class="px-6 py-4 font-label-md text-label-md">Staff Member</th>
+<th class="px-6 py-4 font-label-md text-label-md">Activity Type</th>
+<th class="px-6 py-4 font-label-md text-label-md">Affected Entity</th>
+<th class="px-6 py-4 font-label-md text-label-md">Status</th>
+<th class="px-6 py-4 font-label-md text-label-md text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="audit-table-row transition-colors">
+<td class="px-6 py-4">
+<div class="text-body-md font-medium">Oct 24, 2023</div>
+<div class="text-xs text-on-surface-variant">09:42:12 AM</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-xs font-bold text-on-secondary-fixed">KM</div>
+<div>
+<div class="text-body-md font-medium">Dr. Kwame Mensah</div>
+<div class="text-xs text-on-surface-variant">General Surgeon</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="visibility">visibility</span>
+                                        Viewed Patient Profile
+                                    </div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md font-mono bg-surface-container-low px-2 py-1 rounded inline-block text-sm">PAT-2023-00921</div>
+<div class="text-xs text-on-surface-variant">Kofi Annan</div>
+</td>
+<td class="px-6 py-4">
+<span class="status-pill bg-green-100 text-green-700">Success</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="audit-table-row transition-colors">
+<td class="px-6 py-4">
+<div class="text-body-md font-medium">Oct 24, 2023</div>
+<div class="text-xs text-on-surface-variant">09:15:04 AM</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-xs font-bold text-on-tertiary-fixed">AA</div>
+<div>
+<div class="text-body-md font-medium">Nurse Abena Addo</div>
+<div class="text-xs text-on-surface-variant">OPD Triage</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="edit">edit</span>
+                                        Updated Lab Result
+                                    </div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md font-mono bg-surface-container-low px-2 py-1 rounded inline-block text-sm">LAB-88122-C</div>
+<div class="text-xs text-on-surface-variant">Blood Panel</div>
+</td>
+<td class="px-6 py-4">
+<span class="status-pill bg-green-100 text-green-700">Success</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 - Warning State -->
+<tr class="audit-table-row bg-error-container/5 transition-colors">
+<td class="px-6 py-4">
+<div class="text-body-md font-medium">Oct 24, 2023</div>
+<div class="text-xs text-on-surface-variant">08:55:30 AM</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-xs font-bold text-error">SJ</div>
+<div>
+<div class="text-body-md font-medium text-error">Admin Sarah Jones</div>
+<div class="text-xs text-on-surface-variant">IT Support</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="lock_open">lock_open</span>
+                                        Failed Authentication
+                                    </div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md font-mono bg-surface-container-low px-2 py-1 rounded inline-block text-sm">N/A</div>
+<div class="text-xs text-on-surface-variant">IP: 192.168.1.105</div>
+</td>
+<td class="px-6 py-4">
+<span class="status-pill bg-error-container text-error">Denied</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-error-container rounded-full transition-all text-error">
+<span class="material-symbols-outlined">report_problem</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="audit-table-row transition-colors">
+<td class="px-6 py-4">
+<div class="text-body-md font-medium">Oct 23, 2023</div>
+<div class="text-xs text-on-surface-variant">05:22:11 PM</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-xs font-bold text-on-secondary-fixed">KM</div>
+<div>
+<div class="text-body-md font-medium">Dr. Kwame Mensah</div>
+<div class="text-xs text-on-surface-variant">General Surgeon</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="delete">delete</span>
+                                        Deleted Encounter Note
+                                    </div>
+</td>
+<td class="px-6 py-4">
+<div class="text-body-md font-mono bg-surface-container-low px-2 py-1 rounded inline-block text-sm">ENC-55091</div>
+<div class="text-xs text-on-surface-variant">Ama Serwaa</div>
+</td>
+<td class="px-6 py-4">
+<span class="status-pill bg-green-100 text-green-700">Success</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-low border-t border-outline-variant">
+<span class="text-body-sm text-on-surface-variant">Showing 1 to 10 of 2,492 activities</span>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-semibold">1</button>
+<button class="px-4 py-2 hover:bg-surface rounded-lg text-sm">2</button>
+<button class="px-4 py-2 hover:bg-surface rounded-lg text-sm">3</button>
+<span class="px-2">...</span>
+<button class="px-4 py-2 hover:bg-surface rounded-lg text-sm">250</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Metrics Summary (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface">1,240</div>
+<div class="text-label-md font-label-md text-on-surface-variant">Events Today</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl">gpp_maybe</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface">3</div>
+<div class="text-label-md font-label-md text-on-surface-variant">Security Alerts</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<div>
+<div class="text-headline-sm font-headline-sm text-on-surface">42</div>
+<div class="text-label-md font-label-md text-on-surface-variant">Active Staff Today</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer for security assurance -->
+<footer class="mt-auto px-lg py-6 border-t border-outline-variant bg-surface flex justify-between items-center">
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">shield_with_heart</span>
+                System compliant with MOH standards. All actions are immutable and cryptographically signed.
+            </div>
+<div class="text-xs font-mono text-on-surface-variant bg-surface-container-high px-3 py-1 rounded">
+                SECURE_ID: KWADASO_ADMIN_NODE_04
+            </div>
+</footer>
+</main>
+<script>
+        // Simple row highlight micro-interaction
+        document.querySelectorAll('.audit-table-row').forEach(row => {
+            row.addEventListener('click', () => {
+                // In a real app, this would open a side panel with full JSON diffs or details
+                console.log('Viewing detailed log entry');
+            });
+        });
+
+        // Search highlight logic
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.audit-table-row').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+    </script>
+</body></html>
